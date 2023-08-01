@@ -6,7 +6,7 @@
     </style>
 
     <style name="Theme.ChatApplication" parent="Base.Theme.ChatApplication" />
-    
+
     <style name="EditTextStyle">
         <item name="android:background">@drawable/edittext_background</item>
         <item name="android:textSize">16sp</item>
