@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- res/drawable/whatsapp_edittext_background.xml -->
+<shape xmlns:android="http://schemas.android.com/apk/res/android">
+    <!-- Add your desired background color (for example, light gray) -->
+    <solid android:color="@color/white" />
+    <corners android:radius="16dp" />
+
+    <stroke
+        android:width="1dp"
+        android:color="@color/wild_strawberry" />
+</shape>
