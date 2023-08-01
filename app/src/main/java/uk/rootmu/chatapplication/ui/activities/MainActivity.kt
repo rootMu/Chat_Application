@@ -1,4 +1,4 @@
-package uk.rootmu.chatapplication
+package uk.rootmu.chatapplication.ui.activities
 
 import android.os.Bundle
 import android.view.Menu
@@ -9,6 +9,7 @@ import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.navigateUp
 import androidx.navigation.ui.setupActionBarWithNavController
+import uk.rootmu.chatapplication.R
 import uk.rootmu.chatapplication.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {

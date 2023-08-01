@@ -1,0 +1,21 @@
+<!-- res/drawable/circle_with_gradient.xml -->
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <!-- Gradient circle background -->
+    <item>
+        <shape android:shape="oval">
+            <gradient
+                android:startColor="@color/wild_strawberry"
+            android:endColor="@color/bittersweet"
+            android:angle="45" />
+        </shape>
+    </item>
+
+    <!-- Vector inside the circle -->
+    <item
+        android:drawable="@drawable/send"
+        android:gravity="center"
+        android:top="8dp"
+        android:bottom="8dp"
+        android:start="8dp"
+        android:end="8dp" />
+</layer-list>

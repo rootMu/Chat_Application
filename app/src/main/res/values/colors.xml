@@ -2,4 +2,10 @@
 <resources>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+
+    <color name="tacao">#EEA47F</color>
+    <color name="bittersweet">#FE6D6A</color>
+    <color name="wild_strawberry">#FE257C</color>
+    <color name="concrete">#F2F2F2</color>
+    <color name="link_water">#F2F5FB</color>
 </resources>
