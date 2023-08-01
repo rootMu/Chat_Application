@@ -8,7 +8,7 @@ data class Message(
     val content: String,
     val sender: String,
     val recipient: String,
-    val timestamp: Long
+    val timeStamp: Long = 0
 )  {
     @PrimaryKey(autoGenerate = true)
     var id: Long = 0

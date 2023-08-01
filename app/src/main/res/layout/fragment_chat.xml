@@ -1,70 +1,80 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:fitsSystemWindows="true"
-    android:windowSoftInputMode="adjustResize"
-    tools:context=".ui.fragments.ChatFragment">
+    xmlns:tools="http://schemas.android.com/tools">
 
-    <!-- Message list -->
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/messageRecyclerView"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:paddingStart="16dp"
-        android:paddingTop="8dp"
-        android:paddingEnd="16dp"
-        app:layout_constraintBottom_toTopOf="@+id/messageInputSection"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+    <data>
 
-    <!-- Divider between RecyclerView and SendMessageSection -->
-    <View
-        android:id="@+id/divider"
+        <variable
+            name="viewModel"
+            type="uk.rootmu.chatapplication.ui.viewmodels.ChatViewModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:background="@drawable/top_drop_shadow"
-        app:layout_constraintBottom_toTopOf="@id/messageInputSection" />
+        android:layout_height="match_parent"
+        android:fitsSystemWindows="true"
+        android:windowSoftInputMode="adjustResize"
+        tools:context=".ui.fragments.ChatFragment">
 
-    <!-- Sending Message Section -->
-    <LinearLayout
-        android:id="@+id/messageInputSection"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:background="@color/white"
-        android:elevation="8dp"
-        android:orientation="horizontal"
-        android:padding="8dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent">
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/messageRecyclerView"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:paddingStart="16dp"
+            android:paddingTop="8dp"
+            android:paddingEnd="16dp"
+            app:layout_constraintBottom_toTopOf="@+id/messageInputSection"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-        <EditText
-            android:id="@+id/messageEditText"
-            style="@style/EditTextStyle"
+        <View
+            android:id="@+id/divider"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@drawable/top_drop_shadow"
+            app:layout_constraintBottom_toTopOf="@id/messageInputSection" />
+
+        <LinearLayout
+            android:id="@+id/messageInputSection"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="8dp"
-            android:layout_weight="1"
-            android:autofillHints="no"
-            android:hint="@string/message_prompt"
-            android:inputType="text"
-            android:maxLines="3"
+            android:background="@color/white"
+            android:elevation="8dp"
+            android:orientation="horizontal"
             android:padding="8dp"
-            android:textSize="16sp" />
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent">
 
-        <ImageButton
-            android:id="@+id/sendButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical"
-            android:background="?attr/selectableItemBackgroundBorderless"
-            android:contentDescription="@string/cd_send"
-            android:src="@drawable/ic_send" />
+            <EditText
+                android:id="@+id/messageEditText"
+                style="@style/EditTextStyle"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="8dp"
+                android:layout_weight="1"
+                android:autofillHints="no"
+                android:hint="@string/message_prompt"
+                android:text="@={viewModel.content}"
+                android:inputType="text"
+                android:maxLines="3"
+                android:padding="8dp"
+                android:textSize="16sp" />
 
-    </LinearLayout>
+            <ImageButton
+                android:id="@+id/sendButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:contentDescription="@string/cd_send"
+                android:onClick="@{() -> viewModel.sendMessage(messageEditText.getText().toString())}"
+                android:src="@drawable/ic_send" />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+        </LinearLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>
