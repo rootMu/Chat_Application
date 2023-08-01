@@ -11,7 +11,7 @@ class ChatRepository(private val messageDao: MessageDao, private val defaultDisp
 
     suspend fun insertMessage(message: Message) {
         withContext(defaultDispatcher) {
-            messageDao.insertMessage(message)
+            messageDao.insertMessage(message.copy(timeStamp = System.currentTimeMillis()))
         }
     }
 
