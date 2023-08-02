@@ -7,7 +7,10 @@ import kotlinx.coroutines.withContext
 import uk.rootmu.chatapplication.data.local.dao.MessageDao
 import uk.rootmu.chatapplication.data.local.model.Message
 
-class ChatRepository(private val messageDao: MessageDao, private val defaultDispatcher: CoroutineDispatcher = Dispatchers.Default) {
+class ChatRepository(
+    private val messageDao: MessageDao,
+    private val defaultDispatcher: CoroutineDispatcher = Dispatchers.Default
+) {
 
     suspend fun insertMessage(message: Message) {
         withContext(defaultDispatcher) {

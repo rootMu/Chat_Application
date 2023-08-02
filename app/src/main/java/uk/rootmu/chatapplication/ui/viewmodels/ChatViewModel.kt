@@ -5,6 +5,8 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.SharingStarted
+import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import uk.rootmu.chatapplication.data.local.model.Message
@@ -17,7 +19,8 @@ class ChatViewModel(
 
     // MutableLiveData for the message text
     val content = MutableLiveData<String>()
-    val allMessages = repository.getAllMessages()
+    val allMessages =
+        repository.getAllMessages().stateIn(viewModelScope, SharingStarted.Lazily, null)
 
     fun sendMessage(newContent: String? = content.value) {
         val messageContent = newContent ?: return
