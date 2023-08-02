@@ -5,11 +5,14 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.WindowManager
+import android.view.inputmethod.EditorInfo
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import org.koin.androidx.viewmodel.ext.android.viewModel
+import uk.rootmu.chatapplication.data.local.model.User
 import uk.rootmu.chatapplication.databinding.FragmentChatBinding
+import uk.rootmu.chatapplication.ui.RecipientListener
 import uk.rootmu.chatapplication.ui.adapters.MessageAdapter
 import uk.rootmu.chatapplication.ui.viewmodels.ChatViewModel
 import uk.rootmu.chatapplication.utils.collectFlow
@@ -46,7 +49,6 @@ class ChatFragment : Fragment() {
                             this@with.scrollToPosition(positionStart)
                         }
                     })
-
                 }
             }
         }
@@ -62,6 +64,21 @@ class ChatFragment : Fragment() {
 
     private fun setupListeners() {
         collectFlow(viewModel.allMessages, adapter::submitList)
+        binding.messageEditText.setOnEditorActionListener { _, actionId, _ ->
+            if (actionId == EditorInfo.IME_ACTION_SEND) {
+                viewModel.sendMessage()
+                true
+            } else false
+        }
+    }
+
+    override fun onResume() {
+        super.onResume()
+        with(requireActivity()) {
+            if (this is RecipientListener) {
+                onRecipientChanged(User.RECIPIENT)
+            }
+        }
     }
 
     override fun onDestroyView() {

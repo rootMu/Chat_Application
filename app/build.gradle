@@ -73,6 +73,10 @@ dependencies {
     implementation 'androidx.lifecycle:lifecycle-livedata-ktx:2.6.1'
     implementation 'androidx.lifecycle:lifecycle-runtime-ktx:2.6.1'
 
+    //annotations
+    implementation 'androidx.annotation:annotation:1.6.0'
+    implementation 'androidx.annotation:annotation-jvm:1.6.0'
+
     //test
     testImplementation 'junit:junit:4.13.2'
     testImplementation 'org.mockito:mockito-core:3.11.2'

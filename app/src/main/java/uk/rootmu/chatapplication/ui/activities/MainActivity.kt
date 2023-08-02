@@ -10,9 +10,11 @@ import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.navigateUp
 import androidx.navigation.ui.setupActionBarWithNavController
 import uk.rootmu.chatapplication.R
+import uk.rootmu.chatapplication.data.local.model.User
 import uk.rootmu.chatapplication.databinding.ActivityMainBinding
+import uk.rootmu.chatapplication.ui.RecipientListener
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(), RecipientListener {
 
     private lateinit var appBarConfiguration: AppBarConfiguration
     private lateinit var binding: ActivityMainBinding
@@ -25,6 +27,8 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         setSupportActionBar(binding.toolbar)
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        supportActionBar?.setDisplayShowHomeEnabled(true)
 
         val navController = findNavController(R.id.nav_host_fragment_content_main)
         appBarConfiguration = AppBarConfiguration(navController.graph)
@@ -52,5 +56,9 @@ class MainActivity : AppCompatActivity() {
         val navController = findNavController(R.id.nav_host_fragment_content_main)
         return navController.navigateUp(appBarConfiguration)
                 || super.onSupportNavigateUp()
+    }
+
+    override fun onRecipientChanged(recipient: User) {
+        supportActionBar?.title = recipient.name
     }
 }

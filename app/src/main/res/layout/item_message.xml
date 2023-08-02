@@ -5,12 +5,25 @@
 
     <data>
 
+        <import type="android.view.View" />
+        <import type="android.view.Gravity" />
+
+        <import type="uk.rootmu.chatapplication.utils.extensions.LongExtKt" />
+
         <variable
             name="message"
             type="uk.rootmu.chatapplication.data.local.model.Message" />
 
         <variable
             name="criteriaMet"
+            type="Boolean" />
+
+        <variable
+            name="showHeader"
+            type="Boolean" />
+
+        <variable
+            name="sender"
             type="Boolean" />
     </data>
 
@@ -20,15 +33,48 @@
         android:orientation="vertical"
         android:padding="8dp">
 
+       <LinearLayout
+           android:id="@+id/header"
+           android:layout_width="match_parent"
+           android:layout_height="wrap_content"
+           android:orientation="horizontal"
+           android:layout_gravity="center"
+           android:gravity="center"
+           android:visibility="@{showHeader ? View.VISIBLE : View.GONE}">
+
+           <TextView
+               android:layout_width="wrap_content"
+               android:layout_height="wrap_content"
+               android:text="@{LongExtKt.toDayOfWeek(message.timeStamp)}"
+               tools:text="Thursday"
+               android:textStyle="bold"
+               android:paddingVertical="8dp"
+               android:textSize="11sp"
+               android:textColor="@color/hit_gray"/>
+
+           <TextView
+               android:layout_width="wrap_content"
+               android:layout_height="wrap_content"
+               android:text="@{LongExtKt.toTime(message.timeStamp)}"
+               android:layout_marginStart="3dp"
+               tools:text="11:59"
+               android:textSize="11sp"
+               android:paddingVertical="8dp"
+               android:textColor="@color/iron"/>
+
+       </LinearLayout>
+
         <TextView
-            android:id="@+id/messageTextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@{message.content}"
             tools:text="Hello World!"
             android:padding="8dp"
-            android:textColor="@color/white"
-            android:background="@drawable/speech_bubble_background"
+            android:textColor="@{sender ? @color/white : @color/black}"
+            tools:layout_gravity="end"
+            tools:background="@drawable/speech_bubble_background_other"
+            android:background="@{sender ? @drawable/speech_bubble_background : @drawable/speech_bubble_background_other}"
+            app:sender="@{sender}"
             app:criteriaMet="@{criteriaMet}"/>
 
     </LinearLayout>
