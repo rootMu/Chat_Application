@@ -89,7 +89,10 @@ class ChatViewModelTest {
         val job = launch {
             try {
                 resultFlow.collect { messagesList ->
-                    messages.addAll(messagesList)
+                    messagesList?.let{
+                        messages.addAll(it)
+                    }
+
                 }
             } catch (e: Throwable) {
                 // Handle exceptions here if needed
