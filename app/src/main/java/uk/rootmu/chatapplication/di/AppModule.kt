@@ -20,7 +20,7 @@ val appModule = module {
 
     single { get<ChatDatabase>().messageDao() }
 
-    single { ChatRepository(get(), Dispatchers.IO) }
+    single { ChatRepository(get(), get(), Dispatchers.IO) }
 
     viewModel { ChatViewModel(get(), Dispatchers.IO ) }
 }

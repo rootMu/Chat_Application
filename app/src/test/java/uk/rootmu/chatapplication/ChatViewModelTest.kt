@@ -7,15 +7,13 @@ import kotlinx.coroutines.flow.flowOf
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.test.TestScope
 import kotlinx.coroutines.test.UnconfinedTestDispatcher
-import kotlinx.coroutines.test.advanceTimeBy
 import kotlinx.coroutines.test.advanceUntilIdle
 import kotlinx.coroutines.test.resetMain
 import kotlinx.coroutines.test.runTest
 import kotlinx.coroutines.test.setMain
-import org.junit.After
+import org.junit.jupiter.api.AfterEach
 import org.junit.Assert.*
-import org.junit.Before
-import org.junit.Test
+import org.junit.jupiter.api.BeforeEach
 import org.mockito.Mock
 import org.mockito.Mockito.verify
 import org.mockito.Mockito.`when`
@@ -34,19 +32,19 @@ class ChatViewModelTest {
     private lateinit var mockRepository: ChatRepository
     private lateinit var testSubject: ChatViewModel
 
-    @Before
+    @BeforeEach
     fun setup() {
         MockitoAnnotations.openMocks(this)
         Dispatchers.setMain(testDispatcher)
         testSubject = ChatViewModel(mockRepository, testDispatcher)
     }
 
-    @After
+    @AfterEach
     fun tearDown() {
         Dispatchers.resetMain()
     }
 
-    @Test
+    @org.junit.jupiter.api.Test
     fun `test that message is correctly added to database`() = testScope.runTest {
         val content = "Hello World!"
         val sender = "John"
@@ -71,7 +69,7 @@ class ChatViewModelTest {
         verify(mockRepository).insertMessage(newMessage)
     }
 
-    @Test
+    @org.junit.jupiter.api.Test
     fun `test that messages are retrieved correctly from the database`() = testScope.runTest {
 
         // Given
