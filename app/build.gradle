@@ -2,16 +2,17 @@ plugins {
     id 'com.android.application'
     id 'org.jetbrains.kotlin.android'
     id 'kotlin-kapt'
+    id 'com.google.devtools.ksp'
 }
 
 android {
     namespace 'uk.rootmu.chatapplication'
-    compileSdk 33
+    compileSdk 34
 
     defaultConfig {
         applicationId "uk.rootmu.chatapplication"
         minSdk 24
-        targetSdk 33
+        targetSdk 34
         versionCode 1
         versionName "1.0"
 
@@ -43,7 +44,6 @@ dependencies {
     implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
     implementation 'androidx.navigation:navigation-fragment-ktx:2.6.0'
     implementation 'androidx.navigation:navigation-ui-ktx:2.6.0'
-    implementation 'androidx.activity:activity:1.7.2'
     implementation 'androidx.activity:activity-ktx:1.7.2'
 
     //serializable
@@ -58,7 +58,7 @@ dependencies {
     implementation 'io.insert-koin:koin-androidx-navigation:3.4.2'
 
     //database
-    kapt 'androidx.room:room-compiler:2.5.2'
+    ksp 'androidx.room:room-compiler:2.5.2'
     implementation 'androidx.room:room-runtime:2.5.2'
     implementation 'androidx.room:room-common:2.5.2'
     implementation 'androidx.room:room-ktx:2.5.2'
