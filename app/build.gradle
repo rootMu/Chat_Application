@@ -1,8 +1,8 @@
 plugins {
     id 'com.android.application'
     id 'org.jetbrains.kotlin.android'
-    id 'kotlin-kapt'
     id 'com.google.devtools.ksp'
+    id 'kotlin-kapt'
 }
 
 android {
@@ -34,7 +34,6 @@ android {
         dataBinding true
         viewBinding true
     }
-    buildToolsVersion '30.0.3'
 }
 
 dependencies {
@@ -79,10 +78,10 @@ dependencies {
     implementation 'androidx.annotation:annotation-jvm:1.6.0'
 
     //retrofit
-    implementation "com.squareup.retrofit2:retrofit:2.9.0"
-    implementation "com.squareup.retrofit2:converter-gson:2.9.0"
-    implementation "com.squareup.okhttp3:logging-interceptor:4.10.0"
-    implementation "com.google.code.gson:gson:2.9.0"
+    implementation 'com.squareup.retrofit2:retrofit:2.9.0'
+    implementation 'com.squareup.retrofit2:converter-gson:2.9.0'
+    implementation 'com.squareup.okhttp3:logging-interceptor:4.10.0'
+    implementation 'com.google.code.gson:gson:2.9.0'
 
     //test
     testImplementation 'junit:junit:4.13.2'

@@ -5,7 +5,7 @@ import uk.rootmu.chatapplication.data.remote.Models
 
 data class RequestBody(
     @SerializedName("model")
-    val model: String = Models.GPT4.family,
+    val model: String = Models.GPT35.family,
     @SerializedName("prompt")
     val prompt: String,
     @SerializedName("max_tokens")

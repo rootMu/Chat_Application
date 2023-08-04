@@ -17,6 +17,7 @@ import uk.rootmu.chatapplication.data.local.chatResponses
 import uk.rootmu.chatapplication.data.local.model.Message
 import uk.rootmu.chatapplication.data.local.model.User.Companion.RECIPIENT
 import uk.rootmu.chatapplication.data.local.model.User.Companion.SENDER
+import uk.rootmu.chatapplication.data.remote.Models
 import uk.rootmu.chatapplication.data.remote.model.GeneratedAnswer
 import uk.rootmu.chatapplication.data.remote.model.RequestBody
 import uk.rootmu.chatapplication.data.repository.ChatRepository
@@ -27,6 +28,15 @@ class ChatViewModel(
 ) : ViewModel() {
 
     private var postJob: Job? = null
+    val content = MutableLiveData<String>()
+    val allMessages =
+        repository.getAllMessages().stateIn(viewModelScope, SharingStarted.Lazily, null)
+    private val response = MutableLiveData<GeneratedAnswer>()
+    private val messageResponse = response.map {
+        it.choices.forEach {
+            sendResponseMessage(it.text)
+        }
+    }
 
     private fun postRandomMessages() {
         postJob?.cancel()
@@ -38,17 +48,6 @@ class ChatViewModel(
                     sendResponseMessage()
                 }
             }
-        }
-    }
-
-    val content = MutableLiveData<String>()
-    val allMessages =
-        repository.getAllMessages().stateIn(viewModelScope, SharingStarted.Lazily, null)
-
-    private val response = MutableLiveData<GeneratedAnswer>()
-    private val messageResponse = response.map {
-        it.choices.forEach {
-            sendResponseMessage(it.text)
         }
     }
 
@@ -65,15 +64,18 @@ class ChatViewModel(
             }
             content.postValue("")
 
-            respond(messageContent)
+            //respond(messageContent)
+            sendResponseMessage()
         }
     }
 
     private fun respond(content: String) {
         viewModelScope.launch {
             withContext(defaultDispatcher) {
-                response.value = repository.getPrompt(
-                    RequestBody(prompt = content)
+                response.postValue(
+                    repository.getPrompt(
+                        RequestBody(Models.DAVINCI3.family, content)
+                    )
                 )
             }
         }

@@ -1,5 +1,6 @@
 package uk.rootmu.chatapplication.data.repository
 
+import android.util.Log
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
@@ -27,11 +28,17 @@ class ChatRepository(
         return messageDao.getAllMessages()
     }
 
-    suspend fun getPrompt(message: RequestBody): GeneratedAnswer {
-        return when(message.model) {
-            Models.GPT4.family,
+    suspend fun getPrompt(message: RequestBody): GeneratedAnswer? {
+        return try {
+            when (message.model) {
+                Models.GPT4.family,
                 Models.GPT35.family -> apiService.getPrompt(message)
-            else -> apiService.getLegacyPrompt(message)
+
+                else -> apiService.getLegacyPrompt(message)
+            }
+        }catch (e: Exception) {
+            Log.d("EXCEPTION", "$e")
+            null
         }
     }
 }
